@@ -27,38 +27,40 @@ long long int minScalarProd(vector<int>::iterator it, vector<int>::iterator it2,
 
 int main(void)
 {
-	int numTest = 0, testCase = 1, ans = 0, size = 0;
-	vector<int> v1, v2;
+	int numTest = 0, testCase = 1;
+//	int a = 0b00000010, b = 0b00000001, c = a&b;	// for some reason cant cout << a&b;?
+	long long int m1A = 0, m2B = 0, K = 0, wingPairs = 0;
 
 	cin >> numTest;
-	
+
 	while(numTest > 0)
 	{
-		cin >> size;
-		for(int x = 0; x < size; x++)
-		{
-			cin >> ans; 
-			v1.push_back(ans);
-		}
+		cin >> m1A >> m2B >> K;	
 
-		for(int x = 0; x < size; x++)
-		{
-			cin >> ans; 
-			v2.push_back(ans);
-		}
+		for(long long int z = 0b000000; z < K; z++)
+			for(long long int x = z; x < m1A; x++)
+				for(long long int y = z; y < m2B; y++)
+				{
+					if((x&y)==z)
+					{
+						wingPairs++;
+		//				cout << endl << x << y << z;
+					}
+				}
+				
+				
 
 		if(testCase != 1)
 			cout << endl;
 	//	permute(v1.begin(), v2.begin());	// Order elements to result in minimum prod
-		sort(v1.begin(), v1.end());
-		sort(v2.begin(), v2.end(), decending);
+	//	sort(v1.begin(), v1.end());
+	//	sort(v2.begin(), v2.end(), decending);
 
-		cout << "Case #" << testCase << ": " << minScalarProd(v1.begin(), v2.begin(), size);
+		cout << "Case #" << testCase << ": " << wingPairs;
 		numTest--;	
 		testCase++;
 
-		v1.clear();	// empty
-		v2.clear();
+		wingPairs = 0;
 	}
 
 	return 0;
